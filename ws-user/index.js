@@ -1,6 +1,7 @@
 const { WebSocketServer, WebSocket } = require('ws');
 
-const wss = new WebSocketServer({ port: 8080 });
+const PORT = process.env.PORT || 8080;
+const wss = new WebSocketServer({ port: PORT });
 
 const rooms = {};
 
@@ -8,7 +9,7 @@ const RELAYER_URL = "ws://localhost:3001";
 const relayerSocket = new WebSocket(RELAYER_URL);
 
 relayerSocket.on('open', () => {
-    console.log('Connected to relayer socket');
+    console.log(`[ws-user on port ${PORT}] Connected to relayer socket`);
 });
 
 relayerSocket.on('error', (err) => {
